@@ -3,12 +3,18 @@
  */
 package io.github.xkerman;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+public class App {
+    public static void main(String[] args) throws Exception {
+        if (args.length < 1) {
+            return;
+        }
+        String url = args[0];
+        System.out.println("loading: " + url);
+        WebClient client = new WebClient();
+        HtmlPage page = client.getPage(url);
+        client.waitForBackgroundJavaScript(10 * 1000);
     }
 }
